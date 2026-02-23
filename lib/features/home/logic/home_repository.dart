@@ -18,7 +18,7 @@ class HomeRepository {
   HomeRepository(this._apiProvider, this._dbProvider);
 
   // get products for home
-  Future<DataState<Product?>> fetchProducts() async {
+  Future<DataState<List<Product>?>> fetchProducts() async {
     // check the connection status
     final bool isConnected = 
       await di<InternetConnectionHelper>().checkInternetConnection();
@@ -36,23 +36,28 @@ class HomeRepository {
 
         // success response from server
         if (response.statusCode == 200) {
-          // convert response to product model
-          Product products = Product.fromJson(response.data);
+          // response.data is expected to be a List of product maps
+          final List<dynamic> raw = response.data as List<dynamic>;
+
+          // convert response to list of Product models
+          final List<Product> products = raw
+              .map((e) => Product.fromJson(e as Map<String, dynamic>))
+              .toList();
 
           // cache the data in local database
-          await _dbProvider.insertProduct(product: products);
+          await _dbProvider.insertProducts(products: products);
 
-          // get the item from cache
-          final Product? cachedProduct = await _dbProvider.fetchProducts();
+          // get the items from cache
+          final List<Product>? cachedProducts = await _dbProvider.fetchProducts();
 
           // send to state management as success response
-          return DataSuccess(cachedProduct);
+          return DataSuccess(cachedProducts);
         } 
         
         // failed response and return data from cache if available
         else if (response.statusCode != 200) {
           if (isDbAvailable) {
-            final Product? localSource = 
+            final List<Product>? localSource = 
               await _dbProvider.fetchProducts();
 
             // only return success if localSource is non-null
@@ -67,7 +72,7 @@ class HomeRepository {
           if (isDbAvailable) {
             logger.d('Load [Products] from Local DataBase');
             // if there is cached data, return it
-            final Product? localSource = 
+            final List<Product>? localSource = 
               await _dbProvider.fetchProducts();
             if (localSource != null) return DataSuccess(localSource);
           } 
@@ -81,11 +86,11 @@ class HomeRepository {
     // use data from the database when offline
     else {
       if (isDbAvailable) {
-            logger.e('Load fetching products from local db');
-            // if there is cached data, return it
-            final Product? localSource = 
-              await _dbProvider.fetchProducts();
-            if (localSource != null) return DataSuccess(localSource);
+        logger.e('Load fetching products from local db');
+        // if there is cached data, return it
+        final List<Product>? localSource = 
+          await _dbProvider.fetchProducts();
+        if (localSource != null) return DataSuccess(localSource);
       }
     }
 

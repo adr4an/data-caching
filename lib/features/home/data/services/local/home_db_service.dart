@@ -4,12 +4,12 @@ import 'package:data_caching/core/repos/interface_repos.dart';
 import 'package:data_caching/features/home/data/models/product_model.dart';
 import 'package:hive/hive.dart';
 
-class HomeDbService implements InterfaceRepository {
+class HomeDbService implements InterfaceRepository<List<Product>> {
   // Box key
   static const String _boxKey = DbKeys.dbProducts;
 
-  // Product box
-  late final Box<Product> _productBox;
+  // Product box (untyped to store a List<Product>)
+  late final Box _productBox;
 
   // init database
   Future<void> init() async {
@@ -28,23 +28,24 @@ class HomeDbService implements InterfaceRepository {
   }
 
   @override
-  Future<void> insertItem({required Product data}) async {
+  Future<void> insertItem({required List<Product> data}) async {
     try {
       await _productBox.put(_boxKey, data);
-      logger.d('Product inserted successfully');
+      logger.d('Products inserted successfully');
     }
 
     catch (e) {
-      logger.e('Error inserting product: $e');
+      logger.e('Error inserting products: $e');
     }
   }
 
   @override
-  Future<Product?> fetchAll() {
+  Future<List<Product>?> fetchAll() {
     try {
       // Check if the box is open and has data 
       if (_productBox.isOpen && _productBox.isNotEmpty) {
-        return Future.value(_productBox.get(_boxKey));
+        final dynamic value = _productBox.get(_boxKey);
+        return Future.value(value as List<Product>?);
       } 
       
       // If the box is not open or empty, return null

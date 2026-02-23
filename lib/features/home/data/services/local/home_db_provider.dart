@@ -5,12 +5,12 @@ import 'package:data_caching/features/home/data/services/local/home_db_service.d
 class HomeDbProvider {
   final HomeDbService _homeDbService;
 
-  // initilizer list, can chain multiple initializations
+  // initializer list, can chain multiple initializations
   HomeDbProvider({required HomeDbService homeDbService})
       : _homeDbService = homeDbService;
 
   // read data from database
-  Future<Product?> fetchProducts() async {
+  Future<List<Product>?> fetchProducts() async {
     try {
       return await _homeDbService.fetchAll();
     }
@@ -21,14 +21,14 @@ class HomeDbProvider {
     }
   }
 
-  // insert data into database (cache)
-  Future<void> insertProduct({required Product product}) async {
+  // insert list of products into database (cache)
+  Future<void> insertProducts({required List<Product> products}) async {
     try {
-      await _homeDbService.insertItem(data: product);
+      await _homeDbService.insertItem(data: products);
     }
 
     catch (e) {
-      logger.e('Error inserting product into database: $e');
+      logger.e('Error inserting products into database: $e');
     }
   }
 
