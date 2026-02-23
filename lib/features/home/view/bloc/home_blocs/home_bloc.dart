@@ -26,14 +26,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     ));
 
     // get data DataSuccess or DataError
-    final DataState<Product?> dataState =
-        await _homeRepository.fetchProducts();
+    final DataState<List<Product>?> dataState =
+      await _homeRepository.fetchProducts();
 
-    // success state with non-null product
-    if (dataState is DataSuccess<Product?>) {
+    // success state with non-null product list
+    if (dataState is DataSuccess<List<Product>?>) {
       emit(state.copyWith(
-          homeProductStatus:
-              HomeProductStatusCompleted(dataState.data!)
+        homeProductStatus:
+          HomeProductStatusCompleted(dataState.data!)
       ));
     }
 

@@ -6,8 +6,7 @@ void main() async {
   // Hive initialization
   WidgetsFlutterBinding.ensureInitialized();
 
-  /* Dependency injection setup
-  Wait for the dependency injection setup to complete before running the app */
+  // Wait for the dependency injection setup to complete before running the app 
   await setUpDi();
 
   runApp(const MyApp());

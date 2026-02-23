@@ -9,9 +9,9 @@ class HomeProductStatusInit extends HomeProductStatus {}
 class HomeProductStatusLoading extends HomeProductStatus {}
 
 class HomeProductStatusCompleted extends HomeProductStatus {
-  final Product product;
+  final List<Product> products;
 
-  HomeProductStatusCompleted(this.product);
+  HomeProductStatusCompleted(this.products);
 }
 
 class HomeProductStatusError extends HomeProductStatus {
