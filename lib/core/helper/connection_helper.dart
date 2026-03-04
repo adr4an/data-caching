@@ -1,12 +1,12 @@
-// check if the user is connected to the internet
-
 import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
+// check if the device is connected to the internet
 class InternetConnectionHelper {
-  // Check if the device is connected to the internet
+
   Future<bool> checkInternetConnection() async {
-    var connectivityResult = await Connectivity().checkConnectivity();
+    var connectivityResult = 
+      await Connectivity().checkConnectivity();
 
     // Not connected to any network
     if (connectivityResult == ConnectivityResult.none) {
@@ -22,4 +22,5 @@ class InternetConnectionHelper {
 
     return false; // Default to not connected
   }
+
 }

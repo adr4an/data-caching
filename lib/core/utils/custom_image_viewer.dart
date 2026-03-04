@@ -5,11 +5,12 @@ import 'package:flutter/material.dart';
 class CustomImageViewer {
   CustomImageViewer._();
 
-  static show(
-      {required BuildContext context,
-      required String url,
-      BoxFit? fit,
-      double? radius}) {
+  static show({
+    required BuildContext context,
+    required String url,
+    BoxFit? fit,
+    double? radius
+  }) {
     return CachedNetworkImage(
       imageUrl: url,
       fit: fit ?? BoxFit.cover,

@@ -14,7 +14,7 @@ class AppTheme {
     scheme: FlexScheme.sanJuanBlue,
     surfaceTint: Colors.transparent,
     textTheme: const TextTheme(),
-    fontFamily: GoogleFonts.rubik().fontFamily,
+    fontFamily: GoogleFonts.poppins().fontFamily,
     dialogBackground: Colors.grey.shade100,
     subThemesData: const FlexSubThemesData(
       blendOnLevel: 10,

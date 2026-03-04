@@ -1,0 +1,13 @@
+flutter_launcher_icons:
+  android: true
+  # dart run flutter_launcher_icons -f app_icon.yaml
+
+  image_path: "assets/icons/android/logo1.png"
+  adaptive_icon_background: "assets/icons/android/logo1_background.png"
+  adaptive_icon_foreground: "assets/icons/android/logo1_foreground.png"
+  adaptive_icon_monochrome: "assets/icons/android/logo1_monochrome.png"
+
+  android_12:
+    adaptive_icon_background: "assets/icons/android/logo1_background.png"
+    adaptive_icon_foreground: "assets/icons/android/logo1_foreground.png"
+    adaptive_icon_monochrome: "assets/icons/android/logo1_monochrome.png"

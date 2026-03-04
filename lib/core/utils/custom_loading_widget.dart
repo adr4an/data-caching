@@ -5,9 +5,7 @@ import 'package:flutter/material.dart';
 class CustomLoading {
   CustomLoading._();
 
-  static Widget showWithStyle(
-    BuildContext context,
-  ) =>
+  static Widget showWithStyle(BuildContext context,) =>
       Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

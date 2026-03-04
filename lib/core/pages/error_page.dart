@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:remixicon/remixicon.dart';
 
 class CommonErrorPage extends StatefulWidget {
-  const CommonErrorPage(
-      {super.key,
+  const CommonErrorPage({
+      super.key,
       required this.isForNetwork,
       required this.description,
-      required this.onRetry});
+      required this.onRetry
+  });
 
   final bool isForNetwork;
   final String description;

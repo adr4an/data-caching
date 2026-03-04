@@ -33,7 +33,7 @@ class Product extends HiveObject{
     required this.rating,
   });
 
-  // fetch product from API (loca)
+  // fetch product from API (local)
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
       id: json['id'],
